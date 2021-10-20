@@ -17,7 +17,7 @@ var second = parseInt(date.getSeconds())+10
 var minute = parseInt(date.getMinutes())+10
 var codeNZ =''
 
-//const idClient ='2093'
+//const idClient ='46'
 
 
 describe ('DesktopSH|Dev|UA|CarBook', function(){
@@ -294,14 +294,14 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
             cy.get('.ant-select-dropdown-menu-item-active').click();
         })
         .then(()=>{
+            cy.wait(2000)
             cy.get(':nth-child(5) > .ant-input-number > .ant-input-number-input-wrap > .ant-input-number-input').clear().type('111.99')
             cy.wait(3000)
            // cy.get(':nth-child(6) > .ant-input-number > .ant-input-number-input-wrap > .ant-input-number-input').clear().clear().type('2')
          })
         .then(()=>{
-            cy.wait(3000);
             cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
-            cy.wait(2000);
+            cy.wait(4000);
         })
     });
 
@@ -319,11 +319,6 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
             .then(()=>{
                 cy.get('.ant-table-row > :nth-child(1) > .ant-select > .ant-select-selection').contains('Балансування диска')
                 cy.wait(2000)
-            })
-            .then(()=>{
-                cy.get(':nth-child(5) > .ant-input-number > .ant-input-number-input-wrap > .ant-input-number-input').contains('112.00')
-                cy.wait(3000)
-            /// cy.get(':nth-child(6) > .ant-input-number > .ant-input-number-input-wrap > .ant-input-number-input').contains('2')
             })
     });
 
