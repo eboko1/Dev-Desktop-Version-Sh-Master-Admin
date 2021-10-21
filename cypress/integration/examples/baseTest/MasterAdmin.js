@@ -17,7 +17,7 @@ var second = parseInt(date.getSeconds())+10
 var minute = parseInt(date.getMinutes())+10
 var codeNZ =''
 
-//const idClient ='46'
+//const idClient ='2192'
 
 
 describe ('DesktopSH|Dev|UA|CarBook', function(){
@@ -289,9 +289,9 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
             cy.get('.ant-btn').eq(1).click()
         })
         .then(()=>{
-            cy.get('.ant-table-row > :nth-child(1) > .ant-select > .ant-select-selection').type('Балансування диска')
+            cy.get('.ant-table-row > :nth-child(1) > .ant-select > .ant-select-selection').type('Балансування диска').click();
             cy.wait(1000)
-            cy.get('.ant-select-dropdown-menu-item-active').click();
+           /// cy.get('.ant-select-dropdown-menu-item-active')
         })
         .then(()=>{
             cy.wait(1000)
@@ -305,7 +305,7 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
         })
     });
 
-  it('Перевірка Найменування та Ціни доданої Роботи з діагностики', function(){
+  it('Перевірка Найменування та Ціни доданої Роботи', function(){
         cy.visit(approve);
         cy.wait(3000);
         cy.get('.ant-input-search > .ant-input').type(idClient)
