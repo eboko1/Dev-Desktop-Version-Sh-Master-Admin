@@ -17,7 +17,7 @@ var second = parseInt(date.getSeconds())+10
 var minute = parseInt(date.getMinutes())+10
 var codeNZ =''
 
-//const idClient ='2192'
+//const idClient ='21921'
 
 
 describe ('DesktopSH|Dev|UA|CarBook', function(){
@@ -291,7 +291,6 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
         .then(()=>{
             cy.get('.ant-table-row > :nth-child(1) > .ant-select > .ant-select-selection').type('Балансування диска').click();
             cy.wait(1000)
-           /// cy.get('.ant-select-dropdown-menu-item-active')
         })
         .then(()=>{
             cy.wait(1000)
@@ -317,7 +316,7 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
                 cy.get('.ant-btn').eq(1).click()
             })
             .then(()=>{
-                cy.get('.ant-table-row > :nth-child(1) > .ant-select > .ant-select-selection').contains('Балансування диска')
+                cy.get(':nth-child(1) > .ant-select > .ant-select-selection').contains('Балансування диска')
                 cy.wait(2000)
             })
     });
@@ -341,6 +340,26 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
         cy.wait(2000)
         cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true});
   })
+
+  it('Видалення Роботи', function(){
+        cy.visit(approve);
+        cy.wait(3000);
+        cy.get('.ant-input-search > .ant-input').type(idClient)
+        cy.wait(2000);
+        cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
+        cy.log('Вибір Запису')
+            .then(()=>{            
+                cy.wait(2000)
+                cy.get('[data-row-key="1"] > :nth-child(7) > .anticon > svg').last().click({force: true});
+                cy.wait(2000)
+                cy.get('.ant-popover-buttons > .ant-btn-primary').first().click({force: true});
+            })
+            .then(()=>{
+                cy.wait(2000)
+                cy.get('.ant-table-tbody').should('not.contain', 'Шономонтажний комплекс')
+                cy.wait(8000)
+            })
+    });
 
     it('Додавання Запчастин через Комплекси', function(){
         cy.visit(approve);
@@ -421,10 +440,30 @@ it('Перевірка НЗ в списку Ремонтів', function(){
   cy.log('Вибір Н/З');
   cy.wait(4000);
   cy.get('.styles-m__title---34B8J').contains('Ремонт')
-
 })
 
-  it('Оплата і видача (ОВ)', function(){
+it('Відкриття кaсового Ордера з НЗ', function(){
+    cy.visit(approve);
+    cy.wait(3000);
+    cy.get('.ant-input-search > .ant-input').type(idClient)
+    cy.wait(2000);
+    cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
+    cy.log('Вибір Запису')
+        .then(()=>{            
+            cy.wait(2000)
+           
+        })
+        .then(()=>{
+            cy.wait(2000)
+            cy.get('.anticon-dollar').click()
+            cy.wait(2000)
+            cy.get('.ant-modal-header').contains('Касовий ордер')
+            cy.get('.ant-modal-body').should('exist')
+            cy.wait(2000)
+        })
+});
+
+  it('Оплата і видача', function(){
     cy.visit(progress);
     cy.wait(4000);
     cy.get('.ant-input-search > .ant-input').type(idClient)//пошук
@@ -465,8 +504,7 @@ it('Перевірка НЗ в списку Ремонтів', function(){
        
     });
 
-
-  it(' Перевірка відкриття модалки створення Працівника', function(){
+  it('Перевірка відкриття модалки створення Працівника', function(){
     cy.get('.styles-m__logo---1OVEG').click()//menu
     cy.get(':nth-child(2) > .ant-menu-submenu-title').click().should('exist');
     cy.contains('Працівники').click()
