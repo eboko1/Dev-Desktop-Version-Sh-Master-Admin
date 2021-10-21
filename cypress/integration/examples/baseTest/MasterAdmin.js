@@ -312,12 +312,12 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
         cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
         cy.log('Вибір Запису')
             .then(()=>{            
-                cy.wait(2000)
                 cy.get('.ant-btn').eq(1).click()
+                cy.wait(2000)
             })
             .then(()=>{
                 cy.get(':nth-child(1) > .ant-select > .ant-select-selection').contains('Балансування диска')
-                cy.wait(2000)
+                cy.wait(3000)
             })
     });
 
