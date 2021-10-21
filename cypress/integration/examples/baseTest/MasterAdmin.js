@@ -31,7 +31,7 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
     cy.get('.styles-m__header---1R4ZA').contains('Календар Завантаження');
   });
 
-  it('1.Профіль вибір українського інтерфейсу', function(){
+  it('Профіль вибір українського інтерфейсу', function(){
         cy.get('.styles-m__userName---OrlXo').click()
         .then (()=>{
         cy.get('#language').click()
@@ -43,7 +43,7 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
         })
     })
 
-    it('2.+Клієнта та а/м: '+idClient, function(){
+    it('+Клієнта та а/м: '+idClient, function(){
         cy.get('.styles-m__logo---1OVEG').click()
         cy.wait(1000)
         cy.contains('Ремонти').click({force: true})
@@ -290,18 +290,18 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
         })
         .then(()=>{
             cy.get('.ant-table-row > :nth-child(1) > .ant-select > .ant-select-selection').type('Балансування диска')
-            cy.wait(2000)
+            cy.wait(1000)
             cy.get('.ant-select-dropdown-menu-item-active').click();
         })
         .then(()=>{
+            cy.wait(1000)
+            cy.get(':nth-child(5) > .ant-input-number > .ant-input-number-input-wrap > .ant-input-number-input').clear().type('112')
             cy.wait(2000)
-            cy.get(':nth-child(5) > .ant-input-number > .ant-input-number-input-wrap > .ant-input-number-input').clear().type('111.99')
-            cy.wait(3000)
            // cy.get(':nth-child(6) > .ant-input-number > .ant-input-number-input-wrap > .ant-input-number-input').clear().clear().type('2')
          })
         .then(()=>{
             cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true})
-            cy.wait(4000);
+            cy.wait(3000);
         })
     });
 
