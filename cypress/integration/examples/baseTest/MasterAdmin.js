@@ -443,16 +443,12 @@ it('Перевірка НЗ в списку Ремонтів', function(){
 })
 
 it('Відкриття кaсового Ордера з НЗ', function(){
-    cy.visit(approve);
+    cy.visit(progress);
     cy.wait(3000);
     cy.get('.ant-input-search > .ant-input').type(idClient)
     cy.wait(2000);
     cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
     cy.log('Вибір Запису')
-        .then(()=>{            
-            cy.wait(2000)
-           
-        })
         .then(()=>{
             cy.wait(2000)
             cy.get('.anticon-dollar').click()
