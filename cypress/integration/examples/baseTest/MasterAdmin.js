@@ -304,22 +304,22 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
         })
     });
 
-  it('Перевірка Найменування та Ціни доданої Роботи', function(){
-        cy.visit(approve);
-        cy.wait(3000);
-        cy.get('.ant-input-search > .ant-input').type(idClient)
-        cy.wait(2000);
-        cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
-        cy.log('Вибір Запису')
-            .then(()=>{            
-                cy.get('.ant-btn').eq(1).click()
-                cy.wait(2000)
-            })
-            .then(()=>{
-                cy.get(':nth-child(1) > .ant-select > .ant-select-selection').contains('Балансування диска')
-                cy.wait(3000)
-            })
-    });
+//   it('Перевірка Найменування та Ціни доданої Роботи', function(){
+//         cy.visit(approve);
+//         cy.wait(3000);
+//         cy.get('.ant-input-search > .ant-input').type(idClient)
+//         cy.wait(2000);
+//         cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
+//         cy.log('Вибір Запису')
+//             .then(()=>{            
+//                 cy.get('.ant-btn').eq(1).click()
+//                 cy.wait(2000)
+//             })
+//             .then(()=>{
+//                 cy.get(':nth-child(1) > .ant-select > .ant-select-selection').contains('Балансування диска')
+//                 cy.wait(3000)
+//             })
+//     });
 
   it('Додавання Робіт через Комплекси', function(){
         cy.visit(approve);
