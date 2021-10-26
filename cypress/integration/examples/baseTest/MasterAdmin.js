@@ -17,10 +17,10 @@ var second = parseInt(date.getSeconds())+10
 var minute = parseInt(date.getMinutes())+10
 var codeNZ =''
 
-//const idClient ='21921'
+//const idClient ='7947'
 
 
-describe ('DesktopSH|Dev|UA|CarBook', function(){
+describe ('Dev|DesktopSH|Admin|UA', function(){
   beforeEach('User LogIn ', () => {
     cy.visit(baseUrl)
     cy.get('#login.ant-input').type(Cypress.env('DevSHLogin'));  
@@ -168,7 +168,7 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
         cy.wait(2000)
       })
       .then(()=>{
-        cy.get('.ant-input-number-input').eq(1).focus().clear('0').type('0683781977')
+        cy.get('.ant-input-number-input').eq(1).focus().clear().type('683781977')
         cy.wait(2000)
       })
       .then(()=>{
@@ -304,22 +304,22 @@ describe ('DesktopSH|Dev|UA|CarBook', function(){
         })
     });
 
-//   it('Перевірка Найменування та Ціни доданої Роботи', function(){
-//         cy.visit(approve);
-//         cy.wait(3000);
-//         cy.get('.ant-input-search > .ant-input').type(idClient)
-//         cy.wait(2000);
-//         cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
-//         cy.log('Вибір Запису')
-//             .then(()=>{            
-//                 cy.get('.ant-btn').eq(1).click()
-//                 cy.wait(2000)
-//             })
-//             .then(()=>{
-//                 cy.get(':nth-child(1) > .ant-select > .ant-select-selection').contains('Балансування диска')
-//                 cy.wait(3000)
-//             })
-//     });
+// //   it('Перевірка Найменування та Ціни доданої Роботи', function(){
+// //         cy.visit(approve);
+// //         cy.wait(3000);
+// //         cy.get('.ant-input-search > .ant-input').type(idClient)
+// //         cy.wait(2000);
+// //         cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
+// //         cy.log('Вибір Запису')
+// //             .then(()=>{            
+// //                 cy.get('.ant-btn').eq(1).click()
+// //                 cy.wait(2000)
+// //             })
+// //             .then(()=>{
+// //                 cy.get(':nth-child(1) > .ant-select > .ant-select-selection').contains('Балансування диска')
+// //                 cy.wait(3000)
+// //             })
+// //     });
 
   it('Додавання Робіт через Комплекси', function(){
         cy.visit(approve);
