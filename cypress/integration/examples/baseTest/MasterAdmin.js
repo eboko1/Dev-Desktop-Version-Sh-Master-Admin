@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 
+
 const url = 'dev-'   
 
 
@@ -17,7 +18,7 @@ var second = parseInt(date.getSeconds())+10
 var minute = parseInt(date.getMinutes())+10
 var codeNZ =''
 
-//const idClient ='7947'
+//const idClient ='101027'
 
 
 describe ('Dev|DesktopSH|Admin|UA', function(){
@@ -43,114 +44,150 @@ describe ('Dev|DesktopSH|Admin|UA', function(){
         })
     })
 
-    it('+Клієнта та а/м: '+idClient, function(){
-        cy.get('.styles-m__logo---1OVEG').click()
-        cy.wait(1000)
-        cy.contains('Ремонти').click({force: true})
+it('2.+Клієнта та а/м: '+idClient, function(){
+    cy.get('.styles-m__logo---1OVEG').click()
+    cy.wait(1000)
+    cy.contains('Ремонти').click({force: true})
+    .then(()=>{
+        cy.log('Вибір Меню ремонти');
+        cy.get('a > .ant-btn').click(); // add н/з
+    })
+    .then(()=>{
+        cy.wait(3000)
+        cy.log('Додати клієнта через +');
+        cy.get('.anticon-plus > svg').click()
+
+    })
+    .then(()=>{
+        cy.log('Модалка Додати Клієнта')
+        cy.get('#name').type('БазовийКлієнт' + idClient)
+        cy.wait(2000)
+        cy.get('#patronymic').type('Побатькові')
+       /// cy.get('.ant-modal-body').find('.ant-input').eq(0).should('have.text','БазовийКлієнт'+ idClient)
+        cy.get('#surname').type('Прізвище')
+
         .then(()=>{
-            cy.log('Вибір Меню ремонти');
-            cy.get('a > .ant-btn').click(); // add н/з
+            cy.get('#type').click({ force: true })
+            cy.get('.ant-select-dropdown-menu-item').eq(0).click({ force: true });
         })
         .then(()=>{
-            cy.wait(3000)
-            cy.log('Додати клієнта через +');
-            cy.get('.anticon-plus > svg').click()
+            cy.get('#status').click();
+            cy.contains('Постійний').click();
+        })
+        .then(()=>{
+            cy.get('#source').click();
+            cy.contains('CarBook').click();
+            cy.get('#source').should('have.text','CarBook');
+        })
+        .then(()=>{
+           cy.get('#sex').click();
+           cy.contains('Чоловіча').click();
+        })
+        .then(()=>{
+            cy.log('Дата народження клієнта ');
+            cy.get('#birthday').click();
+            cy.contains('10').click();
+        })
+        .then(()=>{
+            cy.wait(1000)
+            cy.get(':nth-child(3) > :nth-child(3) > .ant-row > .ant-form-item-control-wrapper > .ant-form-item-control > .ant-form-item-children > #comment').click({ force: true }).type('Комент Постійний Клієнт)))')
+           ///// cy.get('#comment').should('have.text','Комент Постійний Клієнт)))')
+        })
+        .then(()=>{
+            // cy.log('Номер телефону клієнта');
+            const tel =second+'0'+minute+''+second+''+minute;
+            cy.get('.ant-modal-body').find('.ant-input-number-input').first().clear().type(tel)
+            ///////cy.get('.ant-form > :nth-child(4) > :nth-child(1)').find('.ant-input-number-input').contains('+380'+tel).should('have.value','+380'+tel)
+        })
+        .then(()=>{
+            cy.get('.ant-modal-body').find('.ant-input').last().clear().type('eboko1@gmail.com')
+        })
+        .then(()=>{
+            cy.get('#paymentRespite').first().clear().type('5');
+        })
+        .then(()=>{
+            cy.wait(1000)
+            cy.log('Додавання АВТО');
+            cy.get('.styles-m__addVehicleButtonCont---Y1h26 > .ant-btn').first().click({ force: true }) //{ force: true }
+        })
+        .then(()=>{
+            cy.log('Додавання Держ.номера а/м');
+            cy.get('#vehicle_add_from_number').clear().type('АО6028ВО')
+        })
+        .then(()=>{
+            cy.log('VIN авто');
+            cy.get('#vehicle_add_from_vin').type('MDHFBUK13U0107589');
+            cy.wait(1000)
+        })
+        .then(()=>{
+            cy.log('Рік авто');
+            cy.get(':nth-child(3) > .ant-col-12').click().type('Чорний')
+            cy.wait(1000)
+            cy.get('.ant-select-dropdown-menu-item-active').click()
+            cy.wait(2000)
+        })
+        .then(()=>{
+            cy.log('Рік авто');
+            cy.get(':nth-child(4) > .ant-col-12').click().type('2014')
+            cy.wait(1000)
+            cy.get('.ant-select-dropdown-menu-item-active').click()
+            cy.wait(2000)
+        })
+        .then(()=>{
+            cy.log('Марка авто')
+            cy.get(':nth-child(5) > .ant-col-12').click().type('NISSAN')
+            cy.wait(2000)
+            cy.get('.ant-select-dropdown-menu-item-active').click()
+            cy.wait(2000)
+        })
+        .then(()=>{
+            cy.log('Модель авто');
+            cy.get(':nth-child(6) > .ant-col-12').click().type('MICRA')
+            cy.wait(2000)
+            cy.get('.ant-select-dropdown-menu-item-active').click()
+            cy.wait(2000)
 
         })
         .then(()=>{
-            cy.log('Модалка Додати Клієнта')
-            cy.get('#name').type('БазовийКлієнт' + idClient)
-            cy.get('#patronymic').type('По батькові')
-            cy.get('#surname').type('Прізвище')
-            .then(()=>{
-                cy.get('#sex').click();
-                cy.contains('Чоловіча').click();
-            })
-            .then(()=>{
-                cy.get('#status').click();
-                cy.contains('Преміум').click();
-            })
-            .then(()=>{
-                cy.log('Дата народження клієнта ');
-                cy.get('#birthday').click();
-                cy.contains('10').click();
-            })
-            .then(()=>{
-                cy.get('#source').click();
-                cy.contains('CarBook').click()
-            })
-            .then(()=>{
-                cy.get('#paymentRespite').first().type('5');
-
-            })
-            .then(()=>{
-                cy.log('Номер телефону клієнта');
-                cy.get('.ant-input-number-input').eq(1).type(second+'0'+minute+''+second+''+minute)
-            })
-            .then(()=>{
-                cy.log('Додавання АВТО');
-                cy.get('.styles-m__addVehicleButtonCont---Y1h26 > .ant-btn').first().click({ force: true }) //{ force: true }
-            })
-            .then(()=>{
-                cy.log('Додавання Держ.номера а/м');
-                cy.get('#vehicle_add_from_number').clear().type('АО6028ВО')
-            })
-            .then(()=>{
-                cy.log('VIN авто');
-                cy.get('#vehicle_add_from_vin').type('MDHFBUK13U0107589');
-                cy.wait(2000)
-            })
-            .then(()=>{
-                cy.log('Рік авто');
-                cy.get(':nth-child(3) > .ant-col-12').click().type('Чорний')
-                cy.wait(2000)
-                cy.get('.ant-select-dropdown-menu-item-active').click()
-                cy.wait(2000)
-            })
-            .then(()=>{
-                cy.log('Рік авто');
-                cy.get(':nth-child(4) > .ant-col-12').click().type('2014')
-                cy.wait(2000)
-                cy.get('.ant-select-dropdown-menu-item-active').click()
-                cy.wait(2000)
-            })
-            .then(()=>{
-                cy.log('Марка авто')
-                cy.get(':nth-child(5) > .ant-col-12').click().type('NISSAN')
-                cy.wait(2000)
-                cy.get('.ant-select-dropdown-menu-item-active').click()
-                cy.wait(2000)
-            })
-            .then(()=>{
-                cy.log('Модель авто');
-                cy.get(':nth-child(6) > .ant-col-12').click().type('MICRA')
-                cy.wait(2000)
-                cy.get('.ant-select-dropdown-menu-item-active').click()
-                cy.wait(2000)
-
-            })
-            .then(()=>{
-                cy.log('Модифікація авто');
-                cy.get(':nth-child(7) > .ant-col-12').click().type('1.4 16V')
-                cy.wait(2000)
-                cy.get('.ant-select-dropdown-menu-item-active').click()
-            })
-            .then(()=>{
-                cy.wait(2000)
-                cy.log('Кнопка ОК');
-                cy.get('.ant-btn-primary').eq(5).click()  // first()      .first().click({ force: true })
-            })
+            cy.log('Модифікація авто');
+            cy.get(':nth-child(7) > .ant-col-12').click().type('1.4 16V')
+            cy.wait(2000)
+            cy.get('.ant-select-dropdown-menu-item-active').click()
+            cy.wait(1000)
         })
         .then(()=>{
-            cy.log('АВТО ДОДАНО');
-            cy.wait(3000)
+            cy.log('Кнопка ОК');
+            cy.get('.ant-btn-primary').eq(5).click()  // first()      .first().click({ force: true })
         })
-        .then(()=>{
-           cy.get('.ant-btn-primary').eq(4).click();
-           cy.get('.ant-btn-primary').contains('Додати').click({force: true} )
-           cy.wait(3000)
-        })
-    });
+    })
+    .then(()=>{
+        cy.log('АВТО ДОДАНО');
+        cy.wait(3000)
+    })
+    .then(()=>{
+       cy.get('.ant-btn-primary').eq(4).click();
+       cy.get('.ant-btn-primary').contains('Додати').click({force: true} )
+       cy.wait(3000)
+    })
+});
+
+
+it('2.1 Перевірка заповнених полів Картка клієнта '+idClient, function(){
+    cy.get('.styles-m__logo---1OVEG').click()
+    cy.get(':nth-child(2) > .ant-menu-submenu-title').click()
+    cy.contains('Клієнти').click()
+      .then(()=>{
+          cy.wait(5000)
+          cy.log('Пошук клієнта');
+          cy.get('.ant-input').last().type('БазовийКлієнт'+idClient)  //
+          cy.wait(5000)
+      })
+      .then(()=>{
+        cy.get('.styles-m__clientLink---2KHGM').first().click()
+        cy.wait(2000)
+      })
+      cy.get('#source').should('have.text','CarBook')
+    })
 
   it('Редагування мобільного номера для клієнта:'+idClient, function(){
     cy.get('.styles-m__logo---1OVEG').click()
@@ -168,7 +205,7 @@ describe ('Dev|DesktopSH|Admin|UA', function(){
         cy.wait(2000)
       })
       .then(()=>{
-        cy.get('.ant-input-number-input').eq(1).focus().clear().type('683781977')
+        cy.get('.ant-input-number-input').eq(0).focus().clear().type('683781977')
         cy.wait(2000)
       })
       .then(()=>{
@@ -178,7 +215,7 @@ describe ('Dev|DesktopSH|Admin|UA', function(){
         cy.get('.styles-m__editClientForm---2hdWi > .ant-btn').click()
       })
       .then(()=>{
-        cy.wait(5000)
+        cy.wait(1000)
       })
     })
 
@@ -200,7 +237,7 @@ describe ('Dev|DesktopSH|Admin|UA', function(){
             cy.get('.ant-btn').first().click();
           })
           .then(()=>{
-            cy.wait(7000)
+            cy.wait(4000)
             cy.log('Ремонт ДОДАНО');
           })
     });
@@ -304,22 +341,22 @@ describe ('Dev|DesktopSH|Admin|UA', function(){
         })
     });
 
-// //   it('Перевірка Найменування та Ціни доданої Роботи', function(){
-// //         cy.visit(approve);
-// //         cy.wait(3000);
-// //         cy.get('.ant-input-search > .ant-input').type(idClient)
-// //         cy.wait(2000);
-// //         cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
-// //         cy.log('Вибір Запису')
-// //             .then(()=>{            
-// //                 cy.get('.ant-btn').eq(1).click()
-// //                 cy.wait(2000)
-// //             })
-// //             .then(()=>{
-// //                 cy.get(':nth-child(1) > .ant-select > .ant-select-selection').contains('Балансування диска')
-// //                 cy.wait(3000)
-// //             })
-// //     });
+//   it('Перевірка Найменування та Ціни доданої Роботи', function(){
+//         cy.visit(approve);
+//         cy.wait(3000);
+//         cy.get('.ant-input-search > .ant-input').type(idClient)
+//         cy.wait(2000);
+//         cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
+//         cy.log('Вибір Запису')
+//             .then(()=>{            
+//                 cy.get('.ant-btn').eq(1).click()
+//                 cy.wait(2000)
+//             })
+//             .then(()=>{
+//                 cy.get(':nth-child(1) > .ant-select > .ant-select-selection').contains('Балансування диска')
+//                 cy.wait(3000)
+//             })
+//     });
 
   it('Додавання Робіт через Комплекси', function(){
         cy.visit(approve);
@@ -397,8 +434,7 @@ describe ('Dev|DesktopSH|Admin|UA', function(){
             cy.wait(2000)
             cy.get('.ant-modal-footer > div > .ant-btn-primary').first().click({force: true});
             cy.wait(7000)
-
-        })
+    })
 
     it('Перевірка табки Історія', function(){
         cy.visit(approve);
@@ -414,33 +450,32 @@ describe ('Dev|DesktopSH|Admin|UA', function(){
             })
     })
 
-   
-it('Перевід НЗ в статус Ремонту', function(){
-    cy.visit(approve);
-  //  cy.get('.styles-m__logo---2zDPJ').click()
+    it('Перевід НЗ в статус Ремонту', function(){
+        cy.visit(approve);
+      //  cy.get('.styles-m__logo---2zDPJ').click()
+        cy.wait(3000);
+        cy.get('.ant-input-search > .ant-input').type(idClient)//пошук
+        cy.wait(2000);
+        cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
+        cy.log('Вибір Н/З');
+        cy.wait(4000);
+        cy.log('Переведіть н/з в статус Ремонт');
+        cy.get('.styles-m__dropdownTitle---3Vlog > :nth-child(2) > span').click();
+        cy.wait(1000);
+        cy.get('.ant-dropdown-menu-item').contains('Ремонт').click()
+        cy.wait(3000);
+    })
+
+    it('Перевірка НЗ в списку Ремонтів', function(){
+    cy.visit(progress);
     cy.wait(3000);
     cy.get('.ant-input-search > .ant-input').type(idClient)//пошук
     cy.wait(2000);
     cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
     cy.log('Вибір Н/З');
     cy.wait(4000);
-    cy.log('Переведіть н/з в статус Ремонт');
-    cy.get('.styles-m__dropdownTitle---3Vlog > :nth-child(2) > span').click();
-    cy.wait(1000);
-    cy.get('.ant-dropdown-menu-item').contains('Ремонт').click()
-    cy.wait(3000);
-})
-
-it('Перевірка НЗ в списку Ремонтів', function(){
-  cy.visit(progress);
-  cy.wait(3000);
-  cy.get('.ant-input-search > .ant-input').type(idClient)//пошук
-  cy.wait(2000);
-  cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
-  cy.log('Вибір Н/З');
-  cy.wait(4000);
-  cy.get('.styles-m__title---34B8J').contains('Ремонт')
-})
+    cy.get('.styles-m__title---34B8J').contains('Ремонт')
+    })
 
 it('Відкриття кaсового Ордера з НЗ', function(){
     cy.visit(progress);
@@ -457,6 +492,18 @@ it('Відкриття кaсового Ордера з НЗ', function(){
             cy.get('.ant-modal-body').should('exist')
             cy.wait(2000)
         })
+});
+
+it('Додавання Коментарів в НЗ', function(){
+    cy.visit(progress);
+    cy.wait(4000);
+    cy.get('.ant-input-search > .ant-input').type(idClient)//пошук
+    cy.wait(2000);
+    cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
+    cy.log('Вибір Н/З');
+    cy.wait(4000);
+    cy.get('#comment').type('ХХХ');
+   
 });
 
   it('Оплата і видача', function(){
@@ -487,18 +534,6 @@ it('Відкриття кaсового Ордера з НЗ', function(){
     cy.wait(4000);
   });
 
-
-  it('Додавання Коментарів в НЗ', function(){
-        cy.visit(success);
-        cy.wait(4000);
-        cy.get('.ant-input-search > .ant-input').type(idClient)//пошук
-        cy.wait(2000);
-        cy.get('.styles-m__ordernLink---2V9V3').first().click({force: true});
-        cy.log('Вибір Н/З');
-        cy.wait(4000);
-        cy.get('#comment').type('ХХХ');
-       
-    });
 
   it('Перевірка відкриття модалки створення Працівника', function(){
     cy.get('.styles-m__logo---1OVEG').click()//menu
