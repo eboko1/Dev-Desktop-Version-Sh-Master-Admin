@@ -121,28 +121,21 @@ it('2.+Клієнта та а/м: '+idClient, function(){
         })
         .then(()=>{
             cy.log('Рік авто');
-            cy.get(':nth-child(3) > .ant-col-12').click().type('Чорний')
-            cy.wait(1000)
+            cy.get(':nth-child(3) > .ant-col-12').click().type('2014')
+            cy.wait(2000)
             cy.get('.ant-select-dropdown-menu-item-active').click()
             cy.wait(2000)
         })
-        .then(()=>{
-            cy.log('Рік авто');
-            cy.get(':nth-child(4) > .ant-col-12').click().type('2014')
-            cy.wait(1000)
-            cy.get('.ant-select-dropdown-menu-item-active').click()
-            cy.wait(2000)
-        })
-        .then(()=>{
+       .then(()=>{
             cy.log('Марка авто')
-            cy.get(':nth-child(5) > .ant-col-12').click().type('NISSAN')
+            cy.get(':nth-child(4) > .ant-col-12').click().type('NISSAN')
             cy.wait(2000)
             cy.get('.ant-select-dropdown-menu-item-active').click()
             cy.wait(2000)
         })
         .then(()=>{
             cy.log('Модель авто');
-            cy.get(':nth-child(6) > .ant-col-12').click().type('MICRA')
+            cy.get(':nth-child(5) > .ant-col-12').click().type('MICRA')
             cy.wait(2000)
             cy.get('.ant-select-dropdown-menu-item-active').click()
             cy.wait(2000)
@@ -150,10 +143,9 @@ it('2.+Клієнта та а/м: '+idClient, function(){
         })
         .then(()=>{
             cy.log('Модифікація авто');
-            cy.get(':nth-child(7) > .ant-col-12').click().type('1.4 16V')
+            cy.get(':nth-child(6) > .ant-col-12').click().type('1.4 16V')
             cy.wait(2000)
             cy.get('.ant-select-dropdown-menu-item-active').click()
-            cy.wait(1000)
         })
         .then(()=>{
             cy.log('Кнопка ОК');
