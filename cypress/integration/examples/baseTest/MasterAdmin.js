@@ -1,30 +1,27 @@
 /// <reference types="cypress" />
 
-
-const url = 'dev-'   
-
-
-const baseUrl = 'https://'+url+'my.carbook.pro';
-const appointments = 'https://'+url+'my.carbook.pro/orders/appointments';
-const approve = 'https://'+url+'my.carbook.pro/orders/approve';
-const progress = 'https://'+url+'my.carbook.pro/orders/progress';
-const success = 'https://'+url+'my.carbook.pro/orders/success';
-const cancel = 'https://'+url+'my.carbook.pro/orders/cancel';
+const baseUrl = 'https://'+Cypress.env('url')+'my.carbook.pro';
+const appointments = 'https://'+Cypress.env('url')+'my.carbook.pro/orders/appointments';
+const approve = 'https://'+Cypress.env('url')+'my.carbook.pro/orders/approve';
+const progress = 'https://'+Cypress.env('url')+'my.carbook.pro/orders/progress';
+const success = 'https://'+Cypress.env('url')+'my.carbook.pro/orders/success';
+const cancel = 'https://'+Cypress.env('url')+'my.carbook.pro/orders/cancel';
 
 
 var date = new Date();
+//const idClient ='101027'
 const idClient =''+date.getDate()+date.getMonth()+date.getMinutes();
 var second = parseInt(date.getSeconds())+10
 var minute = parseInt(date.getMinutes())+10
 var codeNZ =''
 
-//const idClient ='101027'
 
 
-describe ('Dev|DesktopSH|Admin|UA', function(){
+
+describe ('Desktop|SH|Admin|UA', function(){
   beforeEach('User LogIn ', () => {
     cy.visit(baseUrl)
-    cy.get('#login.ant-input').type(Cypress.env('DevSHLogin'));  
+    cy.get('#login.ant-input').type(Cypress.env('Login'));  
     cy.get('#password').type(Cypress.env('Password'));
     cy.get('button').click()
     cy.intercept('GET', baseUrl+'/dashboard')

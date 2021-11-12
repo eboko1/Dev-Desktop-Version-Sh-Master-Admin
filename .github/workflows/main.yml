@@ -1,4 +1,4 @@
-name: Base Tests SH
+name: Base Desktop SH 
 #off
 on:
   push:
